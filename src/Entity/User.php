@@ -6,8 +6,14 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(
+    fields: ['email'],
+    message: 'Cet email existe déjà',
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -16,6 +22,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank]
+    // #[Assert\Email(
+    //     message: 'Cet email {{ value }} n\'est pas valide.',
+    // )]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -25,14 +35,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    // #[Assert\Regex(
+    //     pattern: '#(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}#',
+    //     match: true,
+    //     message: 'Le mot de passe doit faire au moins 8 caractères et contenir: une minuscule, une majuscule et un chiffre',
+    // )]
     private ?string $password = null;
 
+    #[Assert\EqualTo(
+        propertyPath: 'password',
+        message:'Les deux mots de passes ne sont pas identiques.'
+    )]
     public $passwordConfirm;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Votre prénom doit avoir un minimum de {{ limit }}caractères',
+        maxMessage: 'Votre nom doit avoir un minimum de {{ limit }}caractères',
+    )]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $lastName = null;
 
     public function getId(): ?int

@@ -46,6 +46,13 @@ class RegisterController extends AbstractController
 
             //ecrit dans la base de données
             $this->manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre inscription s\'est fait correctement!'
+            );
+        return $this->redirectToRoute('home');
+
         }
 
         return $this->render('register/register.html.twig', [

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,16 +18,16 @@ class RegisterType extends AbstractType
     {
         $builder
 
-            ->add('firstName', TextType::class, ['label' => 'Prénom', 'attr' => ['placeholder' => 'Louis']])
-            ->add('lastName', TextType::class, ['label' => 'Nom', 'attr' => ['placeholder' => 'Jean Dubois']])
-            ->add('email')
+            ->add('firstName', TextType::class, ['required' => false ,'label' => 'Prénom', 'attr' => ['placeholder' => 'Louis']])
+            ->add('lastName', TextType::class, ['required' => false ,'label' => 'Nom', 'attr' => ['placeholder' => 'Jean Dubois']])
+            ->add('email', TextType::class, ['required' => false ])
             // ->add('roles')
 
-            ->add('password', PasswordType::class, [
+            ->add('password', PasswordType::class, ['required' => false ,
                 'label' => 'Mot de passe',
                 'attr' => ['placeholder' => '●●●●●●●●●●'],
             ])
-            ->add('passwordConfirm', PasswordType::class, [
+            ->add('passwordConfirm', PasswordType::class, ['required' => false ,
                 'label' => 'Confirmer le mot de passe',
                 'attr' => ['placeholder' => '●●●●●●●●●●'],
             ])
