@@ -49,9 +49,9 @@ class RegisterController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre inscription s\'est fait correctement!'
+                'Le compte '.$user->getEmail().' a bien été créé.'
             );
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('app_login');
 
         }
 
