@@ -48,6 +48,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     public $passwordConfirm;
 
+    private $oldPassword;
+
+    // #[Assert\Regex(
+    //     pattern: '#(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}#',
+    //     match: true,
+    //     message: 'Le mot de passe doit faire au moins 8 caractères et contenir: une minuscule, une majuscule et un chiffre',
+    // )]
+    private $newPassword;
+
+    #[Assert\EqualTo(
+        propertyPath: 'newPassword',
+        message:'Les deux mots de passes ne sont pas identiques.'
+    )]
+    private $confirmNewPassword;
+
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(
@@ -56,6 +71,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Votre prénom doit avoir un minimum de {{ limit }}caractères',
         maxMessage: 'Votre nom doit avoir un minimum de {{ limit }}caractères',
     )]
+
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
@@ -152,6 +168,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(string $lastName): static
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of oldPassword
+     */ 
+    public function getOldPassword()
+    {
+        return $this->oldPassword;
+    }
+
+    /**
+     * Set the value of oldPassword
+     *
+     * @return  self
+     */ 
+    public function setOldPassword($oldPassword)
+    {
+        $this->oldPassword = $oldPassword;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of newPassword
+     */ 
+    public function getNewPassword()
+    {
+        return $this->newPassword;
+    }
+
+    /**
+     * Set the value of newPassword
+     *
+     * @return  self
+     */ 
+    public function setNewPassword($newPassword)
+    {
+        $this->newPassword = $newPassword;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of confirmNewPassword
+     */ 
+    public function getConfirmNewPassword()
+    {
+        return $this->confirmNewPassword;
+    }
+
+    /**
+     * Set the value of confirmNewPassword
+     *
+     * @return  self
+     */ 
+    public function setConfirmNewPassword($confirmNewPassword)
+    {
+        $this->confirmNewPassword = $confirmNewPassword;
 
         return $this;
     }

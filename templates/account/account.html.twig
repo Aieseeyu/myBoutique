@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace Compte{% endblock %}
+
+{% block content %}
+<h1 >Mon Compte</h1>
+
+<H2>Bienvenue {{app.user.firstName}} sur votre tableau de bord</H2>
+
+<br>
+<a href="{{path('account_password')}}">Modifier le mot de passe</a><br>
+Ajouter adresses <br>
+Les commandes <br>
+
+
+
+
+
+{% endblock %}
