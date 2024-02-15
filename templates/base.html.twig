@@ -13,12 +13,12 @@
 		</title>
 
 		<link
-		href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+		href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" >
 
 		<!-- Custom styles for this template -->
 		<link href="{{asset('assets/css/carousel.css')}}" rel="stylesheet">
 
-		<link href="{{asset('assets/css/style.min.css')}}" rel="stylesheet"> {% block stylesheet %}{% endblock %}
+		 {% block stylesheet %}{% endblock %}
 
 		</head>
 
@@ -104,8 +104,6 @@
 						{% include "_partials/footer.html.twig" %}
 					</footer>
 				</main>
-
-				<script src="{{asset('assets/js/jquery-3.7.1.min.js')}}"></script>
 
 				<script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
 
